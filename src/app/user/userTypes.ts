@@ -6,6 +6,7 @@ export interface UserModelTypes {
   email?: string;
   password?: string;
   role?: Role;
+  image?: string;
   createdAt: Date;
   updatedAt: Date;
 }

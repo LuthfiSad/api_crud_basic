@@ -1,11 +1,12 @@
 import { Role } from "../user/userTypes"
 
 export interface RegisterAuthBodyDTO {
-  email: string
-  password: string
-  name: string
+  id?: string
+  email?: string
+  password?: string
+  name?: string
   role?: Role
-  image: string
+  image?: string
 }
 
 export interface LoginAuthBodyDTO {
@@ -15,8 +16,4 @@ export interface LoginAuthBodyDTO {
 
 export interface LoginAuthResponse {
   access_token: string
-}
-
-export interface TokenDecodeInterface{
-  id: string
 }

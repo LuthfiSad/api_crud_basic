@@ -3,10 +3,12 @@ import { MESSAGE_CODE } from "../../utils/MessageCode";
 import { MESSAGES } from "../../utils/Messages";
 import { ErrorApp } from "../../utils/Response.Mapper";
 import { createUser, getUserByEmail, getUserById } from "../user/userRepository";
-import { LoginAuthBodyDTO, RegisterAuthBodyDTO, TokenDecodeInterface } from "./userTypes";
+import { LoginAuthBodyDTO, RegisterAuthBodyDTO } from "./authTypes";
 import { registerValidate } from "./authValidate";
-import { environment } from "config/dotenvConfig";
 import jwt, { decode } from "jsonwebtoken";
+import { TokenDecodeInterface } from "../../middleware/tokenTypes";
+import { environment } from "../../config/dotenvConfig";
+import { ImageUploadBodyDTO, uploadImage } from "../../config/multerConfig";
 
 export const registerService = async ({
   name,
@@ -14,8 +16,10 @@ export const registerService = async ({
   password,
   role,
   image,
-}: RegisterAuthBodyDTO) => {
-  const user = await getUserByEmail(email);
+  linkImage,
+  pathImage
+}: ImageUploadBodyDTO & RegisterAuthBodyDTO ) => {
+  const user = await getUserByEmail(email as string);
   if (user) {
     return new ErrorApp(
       MESSAGES.ERROR.ALREADY.USER,
@@ -24,19 +28,19 @@ export const registerService = async ({
     );
   }
 
-  const validate = await registerValidate({ name, email, password, image });
+  const validate = await registerValidate({ name, email, password, role });
   if (validate instanceof ErrorApp) {
     return new ErrorApp(validate.message, validate.statusCode, validate.code);
   }
-  const hashPassword = await bcrypt.hash(password, 10);
-  const path = (image as unknown as Express.Multer.File).path
+  const hashPassword = await bcrypt.hash(password as string, 10);
+  uploadImage(image, pathImage, "users");
 
   const response = await createUser({
     name,
     email,
     password: hashPassword,
     role,
-    image: path
+    image: linkImage
   });
   return response;
 };
@@ -57,7 +61,6 @@ export const loginService = async (body: LoginAuthBodyDTO) => {
   if (!match) {
     return new ErrorApp(MESSAGES.ERROR.INVALID.LOGIN, 400, MESSAGE_CODE.BAD_REQUEST);
   }
-  console.log(body);
   const token = jwt.sign({
     id: user.id,
   }, environment.JWT_SECRET as string, { expiresIn: '3d' })

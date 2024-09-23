@@ -1,6 +1,6 @@
 
 import { prisma } from "../../config/prismaConfig"
-import { RegisterAuthBodyDTO } from "../auth/userTypes"
+import { RegisterAuthBodyDTO } from "../auth/authTypes"
 import { IFilterUser } from "./userTypes"
 
 export const getUser = async ({ page, perPage, search, role }: IFilterUser) => {
@@ -57,10 +57,33 @@ export const getUserById = async (id: string) => {
 
 export const createUser = async (data: RegisterAuthBodyDTO) => {
     return await prisma.user.create({
-        data,
+        data: {
+            name: data.name as string,
+            email: data.email as string,
+            password: data.password as string,
+            role: data.role,
+            image: data.image as string
+        },
         select: {
             id: true,
             role: true
         }
+    })
+}
+
+export const updateUser = async (id: string, data: RegisterAuthBodyDTO) => {
+    return await prisma.user.update({
+        where: {
+            id
+        },
+        data
+    })
+}
+
+export const deleteUser = async (id: string) => {
+    return await prisma.user.delete({
+        where: {
+            id
+        },
     })
 }

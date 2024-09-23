@@ -3,15 +3,17 @@ import { loginService, logoutService, registerService } from "./authService";
 import { ErrorApp, ResponseWithData, ResponseWithoutData } from "../../utils/Response.Mapper";
 import { MESSAGE_CODE } from "../../utils/MessageCode";
 import { MESSAGES } from "../../utils/Messages";
-import { LoginAuthResponse } from "./userTypes";
+import { LoginAuthResponse } from "./authTypes";
+import { getLinkImage } from "../../config/multerConfig";
 
 export const registerController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.file)
-  const register = await registerService({...req.body, image: req.file});
+  const [linkImage, pathImage] = getLinkImage(req, "users");  
+  
+  const register = await registerService({...req.body, image: req.file, linkImage, pathImage});
 
   if (register instanceof ErrorApp) {
     next(register);
@@ -30,7 +32,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
       return
   }
   res.cookie("access_token", login, { httpOnly: true })
-  ResponseWithData<LoginAuthResponse>(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER, login as LoginAuthResponse)
+  ResponseWithData<LoginAuthResponse>(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.LOGIN, login as LoginAuthResponse)
 }
 
 export const logoutController = async (req: Request, res: Response, next: NextFunction) => {

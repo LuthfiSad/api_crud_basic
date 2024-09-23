@@ -90,9 +90,11 @@ export const MESSAGES = {
             NIM_ANGGOTA: "Anggota cannot change their NIM",
             CODE_ANGGOTA: "Code is invalid",
             IMAGE_SIZE: "Image size must be less than 5mb",
+            ROLE: "Role is invalid",
             ROLE_ADMIN: "You're not admin",
             CODE_USER: "User is not allowed to use Code",
             FILE_TYPE: "Invalid Image Type",
+            FILE_PATH: "Invalid Image Path",
             OTP_KEY: "Invalid OTP Key",
             OTP_NUMBER: "OTP is invalid, check your email to get a valid OTP",
             OTP_VERIFIED: "Your otp has not been verified",
@@ -150,7 +152,12 @@ export const MESSAGES = {
         }
     },
     SUCCESS: {
-        USER: "User logged in successfully",
+        LOGIN: "Success to login",
+        USER: {
+            GET: "Success to fetch user",
+            DELETE: "Success to delete user",
+            UPDATE: "Success to update user"
+        },
         ANGKATAN: {
             GET: "Success to fetch angkatan",
             DELETE: "Success to delete angkatan",

@@ -1,10 +1,11 @@
-import { Request, Response } from "express"
+import { NextFunction, Request, Response } from "express"
 import { ErrorApp, ResponseWithoutData } from "./Response.Mapper"
 import { MESSAGES } from "./Messages"
 import { MESSAGE_CODE } from "./MessageCode"
 import multer from "multer"
 
-export const HandlingError = (err: ErrorApp | Error, req: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const HandlingError = (err: ErrorApp | Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof multer.MulterError) { // Multer Error Handler
     if (err.code === 'LIMIT_FILE_SIZE') {
       return ResponseWithoutData(res, 400, MESSAGE_CODE.BAD_REQUEST, MESSAGES.ERROR.INVALID.IMAGE_SIZE)
