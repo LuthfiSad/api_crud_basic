@@ -4,6 +4,8 @@ export const MESSAGES = {
             ACCOUNT: "User created successfully",
             INITIAL: "Initial user created successfully"
         },
+        PRODUCT: "Product created successfully",
+        ORDER: "Order created successfully",
         ROLE: "Role created successfully",
         ANGKATAN: "Angkatan created successfully",
         DOSEN: "Dosen created successfully",
@@ -28,6 +30,8 @@ export const MESSAGES = {
                 ID: "Angkatan ID not found",
                 NAME: "Angkatan not found"
             },
+            ORDER: "Order not found",
+            PRODUCT: "Product not found",
             ROLE: "Role not found",
             DOSEN: "Dosen not found",
             STRUKTURAL: "Struktural not found",
@@ -106,7 +110,11 @@ export const MESSAGES = {
             TIME: "Start time must be less than end time",
             READ_NOTIFICATION: "You're not allowed to read this notification",
             MINIMAL_TIME: "Start time and end time has to be at least 1 hour",
-            ABSENSI_NOT_OPEN: "Absensi is not open"
+            ABSENSI_NOT_OPEN: "Absensi is not open",
+            PRICE: "Price must be a number and more than 0",
+            STOCK: "Stock must be a number and more than 0",
+            QUANTITY: "Quantity must be a number and more than 0",
+            QUANTITY_STOCK: "Quantity must be less than or equal to stock",
         },
         UNAUTHORIZED: {
             AUTH: "If you are not logged in, please log in first",
@@ -116,6 +124,9 @@ export const MESSAGES = {
             ADMIN: "Admin can't access this app"
         },
         REQUIRED: {
+            USER_ID: "User Id is required",
+            PRODUCT_ID: "Product Id is required",
+            QUANTITY: "Quantity is required",
             EMAIL: "Email is required",
             PASSWORD: "Password is required",
             NAME: "Name is required",
@@ -142,7 +153,8 @@ export const MESSAGES = {
             SUB_ACARA_ID: "Sub Acara Id is required",
             OTP_KEY: "OTP Key is required",
             OTP: "OTP is required",
-            FCM_TOKEN: "FCM Token is required"
+            FCM_TOKEN: "FCM Token is required",
+            STOCK: "Stock is required",
         },
         RELATION: {
             ANGKATAN: "Angkatan cannot be deleted because it has a relationship"
@@ -157,6 +169,16 @@ export const MESSAGES = {
             GET: "Success to fetch user",
             DELETE: "Success to delete user",
             UPDATE: "Success to update user"
+        },
+        PRODUCT: {
+            GET: "Success to fetch product",
+            DELETE: "Success to delete product",
+            UPDATE: "Success to update product"
+        },
+        ORDER: {
+            GET: "Success to fetch order",
+            DELETE: "Success to delete order",
+            UPDATE: "Success to update order"
         },
         ANGKATAN: {
             GET: "Success to fetch angkatan",

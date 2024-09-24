@@ -1,4 +1,4 @@
-import { Role } from "../user/userTypes"
+import { Role } from "@prisma/client"
 
 export interface RegisterAuthBodyDTO {
   id?: string

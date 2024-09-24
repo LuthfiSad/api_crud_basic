@@ -28,7 +28,7 @@ export const registerService = async ({
     );
   }
 
-  const validate = await registerValidate({ name, email, password, role });
+  const validate = await registerValidate({ name, email, password, role, image });
   if (validate instanceof ErrorApp) {
     return new ErrorApp(validate.message, validate.statusCode, validate.code);
   }
@@ -63,7 +63,7 @@ export const loginService = async (body: LoginAuthBodyDTO) => {
   }
   const token = jwt.sign({
     id: user.id,
-  }, environment.JWT_SECRET as string, { expiresIn: '3d' })
+  }, environment.JWT_SECRET as string, { expiresIn: '1d' })
 
   // const userInfo = { // Add this if you want to return user info
   //     name: user.name,

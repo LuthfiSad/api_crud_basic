@@ -1,4 +1,6 @@
-export type Role = "admin" | "anggota";
+// import { Role } from "@prisma/client"
+
+import { Role } from "@prisma/client";
 
 export interface UserModelTypes {
   id?: string;
@@ -15,5 +17,5 @@ export interface IFilterUser {
   search?: string;
   page?: number;
   perPage?: number;
-  role?: Role | string;
+  role?: Role;
 }

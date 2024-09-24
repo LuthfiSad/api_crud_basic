@@ -2,12 +2,12 @@ import { type Response } from "express";
 import { MetaResponse } from "../interface/ResponseInterface";
 
 // Utility function for sending responses with data
-export function ResponseWithData<Res = unknown>(
+export function HandleResponseApi<Res = unknown>(
   res: Response,
   status: number,
   code: string,
   message: string,
-  data: Res,
+  data?: Res,
   meta?: MetaResponse
 ) {
   const response = {
@@ -16,21 +16,6 @@ export function ResponseWithData<Res = unknown>(
     message,
     data,
     meta,
-  };
-  return res.status(status).json(response);
-}
-
-// Utility function for sending responses without data
-export function ResponseWithoutData(
-  res: Response,
-  status: number,
-  code: string,
-  message: string
-) {
-  const response = {
-    status,
-    code,
-    message,
   };
   return res.status(status).json(response);
 }

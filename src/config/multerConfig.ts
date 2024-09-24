@@ -85,6 +85,9 @@ export const uploadImage = (Image: Express.Multer.File, filename: string, catego
 // }
 
 export const getLinkImage = (req: Request, category: string) => {
+  if (!req.file) {
+    return ['', '']
+  }
   const host = req.protocol + '://' + req.get('host');
   const filename = `${Date.now()}-${req.file?.originalname}`;
   return [host + '/' + category + '/image/' + filename, filename]

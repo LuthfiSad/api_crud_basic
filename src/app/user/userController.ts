@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { MESSAGES } from "../../utils/Messages";
-import { ErrorApp, ResponseWithData, ResponseWithoutData } from "../../utils/Response.Mapper";
+import { ErrorApp, HandleResponseApi } from "../../utils/Response.Mapper";
 import { deleteUserService, getUserByIdService, getUserService, updateUserService } from "./userService";
 import { RequestWithUserId } from "../../middleware/tokenTypes";
 import { MESSAGE_CODE } from "../../utils/MessageCode";
 import { getLinkImage, getPathImage } from "../../config/multerConfig";
+import { Role } from "@prisma/client";
 
 export const getUserController = async (
   req: Request,
@@ -17,7 +18,7 @@ export const getUserController = async (
     search: search as string,
     page: page ? Number(page) : undefined,
     perPage: perPage ? Number(perPage) : undefined,
-    role: role as string,
+    role: role ? (role as string).toLocaleLowerCase() as Role : undefined,
     // openAbsen: openAbsen as string,
     // openRegister: openRegister as string
   });
@@ -27,14 +28,7 @@ export const getUserController = async (
     return;
   }
 
-  ResponseWithData(
-    res,
-    200,
-    MESSAGE_CODE.SUCCESS,
-    MESSAGES.SUCCESS.USER_DATA.GET,
-    user.data,
-    user.meta
-  );
+  HandleResponseApi(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER_DATA.GET, user.data, user.meta);
 };
 
 export const getUserByIdController = async (
@@ -51,7 +45,7 @@ export const getUserByIdController = async (
     return;
   }
 
-  ResponseWithData(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER_DATA.GET, user);
+  HandleResponseApi(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER_DATA.GET, user);
 };
 
 export const getProfileByIdTokenController = async (req: RequestWithUserId, res: Response, next: NextFunction) => {
@@ -63,7 +57,7 @@ export const getProfileByIdTokenController = async (req: RequestWithUserId, res:
     return;
   }
 
-  ResponseWithData(
+  HandleResponseApi(
     res,
     200,
     MESSAGE_CODE.SUCCESS,
@@ -79,9 +73,9 @@ export const getImageController = async (req: Request, res: Response, next: Next
 
     // Mengirimkan file gambar
     res.sendFile(fullPath, (err) => {
-        if (err) {
-            next(err); // Pass error to next middleware
-        }
+      if (err) { 
+        next(new ErrorApp(MESSAGES.ERROR.NOT_FOUND.ROUTE, 404, MESSAGE_CODE.NOT_FOUND))
+      }
     });
 }
 
@@ -96,7 +90,7 @@ export const updateUserController = async (req: Request, res: Response, next: Ne
     return;
   }
 
-  ResponseWithData(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER.UPDATE, user);
+  HandleResponseApi(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER.UPDATE, user);
 }
 
 export const deleteUserController = async (req: Request, res: Response, next: NextFunction) => {
@@ -106,5 +100,5 @@ export const deleteUserController = async (req: Request, res: Response, next: Ne
   if (user instanceof ErrorApp) {
     next(user);
   }
-  ResponseWithoutData(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER.DELETE)
+  HandleResponseApi(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.USER.DELETE)
 }

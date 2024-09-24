@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { loginService, logoutService, registerService } from "./authService";
-import { ErrorApp, ResponseWithData, ResponseWithoutData } from "../../utils/Response.Mapper";
+import { ErrorApp, HandleResponseApi } from "../../utils/Response.Mapper";
 import { MESSAGE_CODE } from "../../utils/MessageCode";
 import { MESSAGES } from "../../utils/Messages";
 import { LoginAuthResponse } from "./authTypes";
@@ -19,7 +19,7 @@ export const registerController = async (
     next(register);
     return;
   }
-  ResponseWithoutData(res, 201, MESSAGE_CODE.SUCCESS, MESSAGES.CREATED.USER.ACCOUNT);
+  HandleResponseApi(res, 201, MESSAGE_CODE.SUCCESS, MESSAGES.CREATED.USER.ACCOUNT);
 };
 
 export const loginController = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,7 +32,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
       return
   }
   res.cookie("access_token", login, { httpOnly: true })
-  ResponseWithData<LoginAuthResponse>(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.LOGIN, login as LoginAuthResponse)
+  HandleResponseApi<LoginAuthResponse>(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.LOGIN, login as LoginAuthResponse)
 }
 
 export const logoutController = async (req: Request, res: Response, next: NextFunction) => {
@@ -44,5 +44,5 @@ export const logoutController = async (req: Request, res: Response, next: NextFu
       return
   }
 
-  ResponseWithoutData(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.LOGOUT)
+  HandleResponseApi(res, 200, MESSAGE_CODE.SUCCESS, MESSAGES.SUCCESS.LOGOUT)
 }

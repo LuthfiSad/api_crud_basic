@@ -9,7 +9,7 @@
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix",
     "generate": "prisma generate",
-    "migrate": "prisma migrate dev",
+    "migrate": "prisma migrate dev --name init",
     "seed": "ts-node prisma/seed.ts"
   },
   "author": "Muhamad Luthfi Sadli",

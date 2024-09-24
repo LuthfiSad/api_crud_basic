@@ -5,7 +5,7 @@ import { ErrorApp } from "../../utils/Response.Mapper"
 import { RegisterAuthBodyDTO } from "./authTypes"
 
 
-export const registerValidate = async ({ name, email, password, role }: RegisterAuthBodyDTO) => {
+export const registerValidate = async ({ name, email, password, role, image }: RegisterAuthBodyDTO) => {
     if (!name) {
         return new ErrorApp(MESSAGES.ERROR.REQUIRED.NAME, 400, MESSAGE_CODE.BAD_REQUEST)
     }
@@ -28,5 +28,9 @@ export const registerValidate = async ({ name, email, password, role }: Register
 
     if (role && !["admin", "anggota"].includes(role)) {
         return new ErrorApp(MESSAGES.ERROR.INVALID.ROLE, 400, MESSAGE_CODE.BAD_REQUEST);
+    }
+
+    if (!image){
+        return new ErrorApp(MESSAGES.ERROR.REQUIRED.IMAGE, 400, MESSAGE_CODE.BAD_REQUEST)
     }
 }

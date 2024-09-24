@@ -14,12 +14,52 @@ datasource db {
 }
 
 model User {
-  id          String       @id @unique @default(uuid())
+  id          String    @id @unique @default(uuid())
   name        String
   email       String    @unique
   password    String
-  role        String    @default("anggota")
+  role        Role?     @default(anggota)
   image       String    @unique
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  orders      Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String     @id @unique @default(uuid())
+  name        String
+  description String?
+  image       String
+  price       Float
+  stock        Int
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @default(now()) @updatedAt @map("updated_at")
+
+  orders      Order[]
+
+  @@map("products")
+}
+
+model Order {
+  id          String     @id @unique @default(uuid())
+  userId      String
+  productId   String
+  quantity    Int
+  totalPrice  Float      @map("total_price")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @default(now()) @updatedAt @map("updated_at")
+
+  // Relasi ke User dan Product
+  user     User    @relation(fields: [userId], references: [id])
+  product  Product @relation(fields: [productId], references: [id])
+
+  @@map("orders")
+}
+
+enum Role {
+  admin
+  anggota
 }

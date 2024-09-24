@@ -1,18 +1,18 @@
 import { deleteImage, ImageUploadBodyDTO, uploadImage } from "../../config/multerConfig"
 import { MESSAGE_CODE } from "../../utils/MessageCode"
 import { MESSAGES } from "../../utils/Messages"
-import { REGEX } from "../../utils/Regex"
 import { ErrorApp, Meta } from "../../utils/Response.Mapper"
 import { RegisterAuthBodyDTO } from "../auth/authTypes"
 import { userMapper } from "./userMapper"
-import { deleteUser, getUser, getUserByEmail, getUserById, getUserCount, updateUser } from "./userRepository"
+import { deleteUser, getUser, getUserById, getUserCount, updateUser } from "./userRepository"
 import { IFilterUser, UserModelTypes } from "./userTypes"
+import { updateUserValidate } from "./userValidate"
 
 export const getUserService = async ({ search, page = 1, perPage = 10, role = undefined }: IFilterUser) => {
 
   const [user, totalData] = await Promise.all([
-      getUser({ search, page, perPage, role: role?.toLocaleLowerCase() as string }),
-      getUserCount({ search, role: role?.toLocaleLowerCase() as string })
+      getUser({ search, page, perPage, role }),
+      getUserCount({ search, role })
   ])
 
   const data = await userMapper(user as unknown as UserModelTypes[])
@@ -51,25 +51,16 @@ export const updateUserService =  async ({
       return new ErrorApp(MESSAGES.ERROR.NOT_FOUND.USER.ACCOUNT, 404, MESSAGE_CODE.NOT_FOUND)
   }
 
+  const validate = await updateUserValidate({ email, role, id })
+  if (validate instanceof ErrorApp) {
+    return new ErrorApp(validate.message, validate.statusCode, validate.code)
+  }
+
   const updateFields: Partial<UserModelTypes> = {};
 
   if (name) updateFields.name = name;
-  if (email) {
-    if (!email.match(REGEX.email)) {
-      return new ErrorApp(MESSAGES.ERROR.INVALID.GLOBAL.EMAIL, 400, MESSAGE_CODE.BAD_REQUEST)
-    }
-    const userEmail = await getUserByEmail(email as string);
-    if (userEmail && userEmail.id !== id) {
-      return new ErrorApp(MESSAGES.ERROR.ALREADY.USER, 400, MESSAGE_CODE.BAD_REQUEST);
-    }
-    updateFields.email = email;
-  }
-  if (role) {
-    if (!["admin", "anggota"].includes(role)) {
-      return new ErrorApp(MESSAGES.ERROR.INVALID.ROLE, 400, MESSAGE_CODE.BAD_REQUEST);
-    }
-    updateFields.role = role
-  };
+  if (email) updateFields.email = email;
+  if (role) updateFields.role = role;
   if (image) {
     uploadImage(image, pathImage, "users");
     deleteImage(user.image, "users");
