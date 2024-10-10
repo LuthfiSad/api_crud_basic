@@ -2,6 +2,7 @@
   "name": "express-template-luthfi",
   "version": "1.0.1",
   "main": "./src/index.ts",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "npx nodemon",
