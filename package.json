@@ -15,6 +15,9 @@
   "author": "Muhamad Luthfi Sadli",
   "license": "MIT",
   "description": "membuat template rest api dengan express ts",
+  "bin": {
+    "express-template-luthfi": "./bin/cli.js"
+  },
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "@types/express": "^4.17.21",
