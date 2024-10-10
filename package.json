@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "prisma": "^5.19.1",
+    "template-express-luthfi": "file:",
     "test_express_ts": "file:",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0"

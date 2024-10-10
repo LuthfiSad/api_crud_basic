@@ -1497,6 +1497,29 @@ tar@^6.1.11:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
+"template-express-luthfi@file:":
+  version "1.0.0"
+  resolved "file:"
+  dependencies:
+    "@prisma/client" "^5.19.1"
+    "@types/express" "^4.17.21"
+    "@types/http-errors" "^2.0.4"
+    "@types/joi" "^17.2.2"
+    bcrypt "^5.1.1"
+    cookie-parser "^1.4.6"
+    cors "^2.8.5"
+    dotenv "^16.4.5"
+    express "^4.21.0"
+    express-template-luthfi "file:"
+    joi "^17.13.3"
+    jsonwebtoken "^9.0.2"
+    multer "^1.4.5-lts.1"
+    prisma "^5.19.1"
+    template-express-luthfi "file:"
+    test_express_ts "file:"
+    ts-node "^10.9.2"
+    tsconfig-paths "^4.2.0"
+
 "test_express_ts@file:":
   version "1.0.0"
   resolved "file:"
