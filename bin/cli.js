@@ -5,7 +5,7 @@ import { execSync } from 'child_process';
 
 // Menampilkan pesan sambutan
 console.log('======================================');
-console.log(' Welcome to express-template-luthfi! ');
+console.log(' Welcome to template-express-luthfi! ');
 console.log('======================================');
 console.log('This will create a new Express project for you.');
 console.log('Please wait while we set everything up...');
