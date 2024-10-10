@@ -1,5 +1,5 @@
 {
-  "name": "express-template-luthfi",
+  "name": "template-express-luthfi",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "type": "module",

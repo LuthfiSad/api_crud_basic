@@ -702,7 +702,7 @@ etag@~1.8.1:
   version "1.8.1"
 
 "express-template-luthfi@file:":
-  version "1.0.1"
+  version "1.0.0"
   resolved "file:"
   dependencies:
     "@prisma/client" "^5.19.1"
@@ -1498,7 +1498,7 @@ tar@^6.1.11:
     yallist "^4.0.0"
 
 "test_express_ts@file:":
-  version "1.0.1"
+  version "1.0.0"
   resolved "file:"
   dependencies:
     "@prisma/client" "^5.19.1"
