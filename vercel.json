@@ -7,7 +7,7 @@
       "config": {
         "includeFiles": ["src/**"],
         "commands": {
-          "build": "tsc"
+          "build": "prisma generate && tsc"
         }
       }
     }
