@@ -12,8 +12,8 @@ Proyek ini adalah backend aplikasi yang dibangun menggunakan **Express**, **Type
 ## Instalasi
 1. Clone repositori ini:
    ```bash
-   git clone https://github.com/LuthfiSad/Technical-Test-Api.git
-   cd Technical-Test-Api
+   git clone https://github.com/LuthfiSad/api_flutter_crud_basic.git
+   cd api_flutter_crud_basic
    ```
    
 2. Instal dependensi:
@@ -23,7 +23,7 @@ Proyek ini adalah backend aplikasi yang dibangun menggunakan **Express**, **Type
 
 3. Pastikan Anda memiliki MongoDB yang berjalan dan buat file .env di root proyek dengan konfigurasi berikut:
 ```env
-DATABASE_URL="mongodb://<username>:<password>@localhost:27017/<dbname>"
+DATABASE_URL="postgresql://<username>:<password>@localhost:5432/<dbname>"
 ```
 
 ## Menjalankan Aplikasi
@@ -35,7 +35,7 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
 
 ## Endpoint
 
-### 1. **Get All Customers**
+### 1. **Get All Items**
 - **Endpoint:** `GET /`
 - **Deskripsi:** Mengambil semua data pelanggan.
 - **Response:**
@@ -45,19 +45,15 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
     {
       "status": 200,
       "code": "SUCCESS",
-      "message": "Customers retrieved successfully",
+      "message": "Items retrieved successfully",
       "data": [
         {
-          "id": "string",
-          "customerId": 1,
-          "gender": "Male",
-          "age": 30,
-          "annualIncome": 60000,
-          "spendingScore": 70,
-          "profession": "Engineer",
-          "workExperience": 5,
-          "familySize": 3
-        }
+          "id": "08ec749e-7348-4cc7-abb8-580989788ba3",
+          "itemCode": "AAAB",
+          "itemName": "Sepatu Jelek",
+          "stock": 9,
+          "price": 1000000
+        },
       ],
       "meta": {
         "page": 1,
@@ -68,7 +64,7 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
     }
     ```
 
-### 2. **Get Customer By ID**
+### 2. **Get Item By ID**
 - **Endpoint:** `GET /:id`
 - **Deskripsi:** Mengambil data pelanggan berdasarkan ID.
 - **Path Parameters:**
@@ -80,36 +76,29 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
     {
       "status": 200,
       "code": "SUCCESS",
-      "message": "Customer retrieved successfully",
+      "message": "Item retrieved successfully",
       "data": {
-        "id": "string",
-        "customerId": 1,
-        "gender": "Male",
-        "age": 30,
-        "annualIncome": 60000,
-        "spendingScore": 70,
-        "profession": "Engineer",
-        "workExperience": 5,
-        "familySize": 3
-      }
+        "id": "08ec749e-7348-4cc7-abb8-580989788ba3",
+        "itemCode": "AAAB",
+        "itemName": "Sepatu Jelek",
+        "stock": 9,
+        "price": 1000000
+      },
     }
     ```
 
-### 3. **Create Customer**
+### 3. **Create Item**
 - **Endpoint:** `POST /`
 - **Deskripsi:** Menambahkan pelanggan baru.
 - **Body:**
   ```json
   {
-    "customerId": 1,
-    "gender": "Male",
-    "age": 30,
-    "annualIncome": 60000,
-    "spendingScore": 70,
-    "profession": "Engineer",
-    "workExperience": 5,
-    "familySize": 3
-  }
+    "id": "08ec749e-7348-4cc7-abb8-580989788ba3",
+    "itemCode": "AAAB",
+    "itemName": "Sepatu Jelek",
+    "stock": 9,
+    "price": 1000000
+  },
   ```
 - **Response:**
   - **Status:** 201 Created
@@ -118,22 +107,18 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
     {
       "status": 201,
       "code": "SUCCESS",
-      "message": "Customer created successfully",
+      "message": "Item created successfully",
       "data": {
-        "id": "string",
-        "customerId": 1,
-        "gender": "Male",
-        "age": 30,
-        "annualIncome": 60000,
-        "spendingScore": 70,
-        "profession": "Engineer",
-        "workExperience": 5,
-        "familySize": 3
-      }
+        "id": "08ec749e-7348-4cc7-abb8-580989788ba3",
+        "itemCode": "AAAB",
+        "itemName": "Sepatu Jelek",
+        "stock": 9,
+        "price": 1000000
+      },
     }
     ```
 
-### 4. **Update Customer**
+### 4. **Update Item**
 - **Endpoint:** `PUT /:id`
 - **Deskripsi:** Memperbarui data pelanggan berdasarkan ID.
 - **Path Parameters:**
@@ -141,21 +126,18 @@ Aplikasi akan tersedia di `http://localhost:8000` (atau port yang ditentukan ole
 - **Body:**
   ```json
   {
-    "customerId": 1,
-    "gender": "Female",
-    "age": 28,
-    "annualIncome": 70000,
-    "spendingScore": 80,
-    "profession": "Doctor",
-    "workExperience": 6,
-    "familySize": 4
-  }
+    "id": "08ec749e-7348-4cc7-abb8-580989788ba3",
+    "itemCode": "AAAB",
+    "itemName": "Sepatu Jelek",
+    "stock": 9,
+    "price": 1000000
+  },
   ```
 - **Response:**
   - **Status:** 204 No Content
   - **Body:** Tidak ada konten.
 
-### 5. **Delete Customer**
+### 5. **Delete Item**
 - **Endpoint:** `DELETE /:id`
 - **Deskripsi:** Menghapus pelanggan berdasarkan ID.
 - **Path Parameters:**
@@ -201,26 +183,17 @@ Skrip dalam `package.json` memungkinkan Anda untuk menjalankan perintah untuk me
 - `seed`: Menjalankan seed database.
 
 ## Database
-Schema Prisma menggunakan MongoDB dan mendefinisikan model `Customer` dengan atribut yang sesuai. Model ini berisi informasi dasar tentang pelanggan.
+Schema Prisma menggunakan MongoDB dan mendefinisikan model `Item` dengan atribut yang sesuai. Model ini berisi informasi dasar tentang pelanggan.
 
 ### Contoh Model Prisma
 ```prisma
-model Customer {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  customerId        Int      @map("CustomerID")
-  gender            Gender   @map("Gender")
-  age               Int      @map("Age")
-  annualIncome      Float    @map("Annual Income ($)")
-  spendingScore     Int      @map("Spending Score (1-100)")
-  profession        String   @map("Profession")
-  workExperience    Int      @map("Work Experience")
-  familySize        Int      @map("Family Size")
+model Item {
+  id         String  @id @default(uuid()) @map("item_id")
+  itemCode       String  @map("item_code")
+  itemName       String  @map("item_name")
+  stock      Int     @map("stock")
+  price      Float   @map("price")
 
-  @@map("customers")
-}
-
-enum Gender {
-  Male
-  Female
+  @@map("items")
 }
 ```
