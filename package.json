@@ -1,5 +1,5 @@
 {
-  "name": "technical-test",
+  "name": "api-flutter-crud-basic",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "scripts": {
@@ -27,7 +27,7 @@
     "express": "^4.21.0",
     "mongodb": "^6.9.0",
     "prisma": "^5.19.1",
-    "technical-test": "file:",
+    "api-flutter-crud-basic": "file:",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0"
   },

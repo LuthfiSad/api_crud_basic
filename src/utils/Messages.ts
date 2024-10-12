@@ -17,6 +17,7 @@ export const MESSAGES = {
         ABSENSI: "Absensi created successfully",
         MERCHANDISE: "Merchandise created successfully",
         CUSTOMER: "Customer created successfully",
+        ITEM: "Item created successfully",
     },
     ERROR: {
         NOT_FOUND: {
@@ -46,7 +47,8 @@ export const MESSAGES = {
             ROUTE: "Route not found, Check again your endpoint!",
             NOTIFICATION: "Notification not found",
             VERSION: "Version not found",
-            CUSTOMER: "Customer not found"
+            CUSTOMER: "Customer not found",
+            ITEM: "Item not found"
         },
         ALREADY: {
             GLOBAL: {
@@ -124,6 +126,8 @@ export const MESSAGES = {
             WORK_EXPERIENCE: "Work Experience must be a number and more than 0",
             FAMILY_SIZE: "Family Size must be a number and more than 0",
             PROFESSION: "Profession must be a string",
+            ITEM_NAME: "Item Name must be a string",
+            ITEM_CODE: "Item Code must be a string",
         },
         UNAUTHORIZED: {
             AUTH: "If you are not logged in, please log in first",
@@ -172,6 +176,8 @@ export const MESSAGES = {
             AGE: "Age is required",
             ANNUAL_INCOME: "Annual Income is required",
             SPENDING_SCORE: "Spending Score is required",
+            ITEM_NAME: "Item Name is required",
+            ITEM_CODE: "Item Code is required",
         },
         RELATION: {
             ANGKATAN: "Angkatan cannot be deleted because it has a relationship"
@@ -285,6 +291,11 @@ export const MESSAGES = {
         VERSION: {
             GET: "Success to get version",
             UPDATE: "Success to update version"
+        },
+        ITEM: {
+            GET: "Success to fetch item",
+            DELETE: "Success to delete item",
+            UPDATE: "Success to update item"
         }
     }
 }

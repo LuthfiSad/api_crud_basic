@@ -1,11 +1,11 @@
 import { Router, type Request, type Response } from "express";
 import { MESSAGES } from "../utils/Messages";
-import costumerRoute from "../app/costumer/costumerRoute";
+import itemRoute from "../app/item/itemRoute";
 import { MESSAGE_CODE } from "../utils/MessageCode";
 
 const route = Router();
 
-route.use("/customers", costumerRoute)
+route.use("/items", itemRoute)
 
 route.get("/", (req: Request, res: Response) => {
     return res.json({ message: "Hello World 🚀" })

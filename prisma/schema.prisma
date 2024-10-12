@@ -9,25 +9,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("MONGODBURL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Customer {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  customerId        Int      @map("CustomerID")
-  gender            Gender   @map("Gender")
-  age               Int      @map("Age")
-  annualIncome      Float    @map("Annual Income ($)")
-  spendingScore     Int      @map("Spending Score (1-100)")
-  profession        String   @map("Profession")
-  workExperience    Int      @map("Work Experience")
-  familySize        Int      @map("Family Size")
+model Item {
+  id         String  @id @default(uuid()) @map("item_id")
+  itemCode       String  @map("item_code")
+  itemName       String  @map("item_name")
+  stock      Int     @map("stock")
+  price      Float   @map("price")
 
-  @@map("customers")
-}
-
-enum Gender {
-  Male
-  Female
+  @@map("items")
 }

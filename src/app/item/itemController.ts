@@ -2,35 +2,29 @@ import { NextFunction, Request, Response } from "express";
 import { MESSAGES } from "../../utils/Messages";
 import { ErrorApp, HandleResponseApi } from "../../utils/Response.Mapper";
 import {
-  createCustomerService,
-  deleteCustomerService,
-  getCustomerByIdService,
-  getCustomerService,
-  updateCustomerService,
-} from "./costumerService";
+  createItemService,
+  deleteItemService,
+  getItemByIdService,
+  getItemService,
+  updateItemService,
+} from "./itemService";
 import { MESSAGE_CODE } from "../../utils/MessageCode";
-import { Gender } from "@prisma/client";
 // import { RequestWithUserId } from "../../middleware/tokenTypes";
 
-export const getCustomerController = async (
+export const getItemController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { page, perPage, search, incomeFrom, incomeTo, gender, profession } =
+  const { page, perPage, search, priceFrom, priceTo } =
     req.query;
 
-  const customers = await getCustomerService({
+  const customers = await getItemService({
     search: search as string,
     page: page ? Number(page) : undefined,
     perPage: perPage ? Number(perPage) : undefined,
-    incomeFrom: incomeFrom ? Number(incomeFrom) : undefined,
-    incomeTo: incomeTo ? Number(incomeTo) : undefined,
-    gender: gender
-      ? (((gender as string).charAt(0).toUpperCase() +
-          (gender as string).slice(1).toLowerCase()) as Gender)
-      : undefined,
-    profession: profession ? (profession as string) : undefined,
+    priceFrom: priceFrom ? Number(priceFrom) : undefined,
+    priceTo: priceTo ? Number(priceTo) : undefined,
   });
 
   if (customers instanceof ErrorApp) {
@@ -42,23 +36,23 @@ export const getCustomerController = async (
     res,
     200,
     MESSAGE_CODE.SUCCESS,
-    MESSAGES.SUCCESS.CUSTOMER.GET,
+    MESSAGES.SUCCESS.ITEM.GET,
     customers.data,
     customers.meta
   );
 };
 
-export const getCustomerByIdController = async (
+export const getItemByIdController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const { id } = req.params;
 
-  const CUSTOMER = await getCustomerByIdService(id);
+  const ITEM = await getItemByIdService(id);
 
-  if (CUSTOMER instanceof ErrorApp) {
-    next(CUSTOMER);
+  if (ITEM instanceof ErrorApp) {
+    next(ITEM);
     return;
   }
 
@@ -66,29 +60,29 @@ export const getCustomerByIdController = async (
     res,
     200,
     MESSAGE_CODE.SUCCESS,
-    MESSAGES.SUCCESS.CUSTOMER.GET,
-    CUSTOMER
+    MESSAGES.SUCCESS.ITEM.GET,
+    ITEM
   );
 };
 
-export const createCustomerController = async (
+export const createItemController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const customerData = req.body; // Dapatkan data customer dari request body
 
-  const customer = await createCustomerService(customerData);
+  const customer = await createItemService(customerData);
 
   if (customer instanceof ErrorApp) {
     next(customer);
     return;
   }
 
-  HandleResponseApi(res, 201, MESSAGE_CODE.SUCCESS, MESSAGES.CREATED.CUSTOMER);
+  HandleResponseApi(res, 201, MESSAGE_CODE.SUCCESS, MESSAGES.CREATED.ITEM);
 };
 
-export const updateCustomerController = async (
+export const updateItemController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -96,7 +90,7 @@ export const updateCustomerController = async (
   const { id } = req.params;
   const customerData = { ...req.body, id }; // Gabungkan data customer dengan id
 
-  const customer = await updateCustomerService(customerData);
+  const customer = await updateItemService(customerData);
 
   if (customer instanceof ErrorApp) {
     next(customer);
@@ -107,18 +101,18 @@ export const updateCustomerController = async (
     res,
     200,
     MESSAGE_CODE.SUCCESS,
-    MESSAGES.SUCCESS.CUSTOMER.UPDATE,
+    MESSAGES.SUCCESS.ITEM.UPDATE,
   );
 };
 
-export const deleteCustomerController = async (
+export const deleteItemController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const { id } = req.params;
 
-  const customer = await deleteCustomerService(id);
+  const customer = await deleteItemService(id);
   if (customer instanceof ErrorApp) {
     next(customer);
     return;
@@ -128,6 +122,6 @@ export const deleteCustomerController = async (
     res,
     200,
     MESSAGE_CODE.SUCCESS,
-    MESSAGES.SUCCESS.CUSTOMER.DELETE
+    MESSAGES.SUCCESS.ITEM.DELETE
   );
 };
