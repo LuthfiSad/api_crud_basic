@@ -16,7 +16,7 @@ export const MESSAGES = {
         SUB_ACARA: "Sub Acara created successfully",
         ABSENSI: "Absensi created successfully",
         MERCHANDISE: "Merchandise created successfully",
-
+        CUSTOMER: "Customer created successfully",
     },
     ERROR: {
         NOT_FOUND: {
@@ -45,7 +45,8 @@ export const MESSAGES = {
             SERVICE: "Service not found",
             ROUTE: "Route not found, Check again your endpoint!",
             NOTIFICATION: "Notification not found",
-            VERSION: "Version not found"
+            VERSION: "Version not found",
+            CUSTOMER: "Customer not found"
         },
         ALREADY: {
             GLOBAL: {
@@ -115,6 +116,14 @@ export const MESSAGES = {
             STOCK: "Stock must be a number and more than 0",
             QUANTITY: "Quantity must be a number and more than 0",
             QUANTITY_STOCK: "Quantity must be less than or equal to stock",
+            CUSTOMER_ID: "Customer ID must be a number",
+            GENDER: "Gender must be Male or Female",
+            AGE: "Age must be a number and more than 0",
+            ANNUAL_INCOME: "Annual Income must be a number and more than 0",
+            SPENDING_SCORE: "Spending Score must be a number and more than 0 and less than 100",
+            WORK_EXPERIENCE: "Work Experience must be a number and more than 0",
+            FAMILY_SIZE: "Family Size must be a number and more than 0",
+            PROFESSION: "Profession must be a string",
         },
         UNAUTHORIZED: {
             AUTH: "If you are not logged in, please log in first",
@@ -155,6 +164,14 @@ export const MESSAGES = {
             OTP: "OTP is required",
             FCM_TOKEN: "FCM Token is required",
             STOCK: "Stock is required",
+            CUSTOMER_ID: "Customer Id is required",
+            GENDER: "Gender is required",
+            PROFESSION: "Profession is required",
+            WORK_EXPERIENCE: "Work Experience is required",
+            FAMILY_SIZE: "Family Size is required",
+            AGE: "Age is required",
+            ANNUAL_INCOME: "Annual Income is required",
+            SPENDING_SCORE: "Spending Score is required",
         },
         RELATION: {
             ANGKATAN: "Angkatan cannot be deleted because it has a relationship"
@@ -174,6 +191,11 @@ export const MESSAGES = {
             GET: "Success to fetch product",
             DELETE: "Success to delete product",
             UPDATE: "Success to update product"
+        },
+        CUSTOMER: {
+            GET: "Success to fetch customer",
+            DELETE: "Success to delete customer",
+            UPDATE: "Success to update customer"
         },
         ORDER: {
             GET: "Success to fetch order",

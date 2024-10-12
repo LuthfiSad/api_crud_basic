@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "483a0a09-cc84-414c-a75f-f7ee6bf3d773",
+		"name": "Technical Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31363995"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{5000}}/customers?perPage=10&page=1",
+							"host": [
+								"{{5000}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Male",
+									"disabled": true
+								},
+								{
+									"key": "incomeFrom",
+									"value": "15001",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "female",
+									"disabled": true
+								},
+								{
+									"key": "perPage",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{5000}}/customers/6709455b7674a22dc3d45d38"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{5000}}/customers/67092059f0bd68d68c79579c"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 2,\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{5000}}/customers/67094269803ec7ce1010f132"
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 1,\r\n    \"gender\": \"Male\",\r\n    \"age\": \"12\",\r\n    \"annualIncome\": 1000,\r\n    \"spendingScore\": 99,\r\n    \"profession\": \"Informatika\",\r\n    \"workExperience\": 10,\r\n    \"familySize\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{5000}}/customers"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
