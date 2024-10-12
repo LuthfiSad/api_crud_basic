@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const environment = {
-    DATABASE_URL: process.env.DATABASE_URL,
+    MONGODBURL: process.env.MONGODBURL,
     PORT: process.env.PORT,
     // JWT_SECRET: process.env.JWT_SECRET,
     // DB_NAME: process.env.DB_NAME,
