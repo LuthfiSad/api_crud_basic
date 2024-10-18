@@ -13,12 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String    @id @unique @default(uuid())
+  name        String
+  email       String    @unique
+  password    String
+  image       String    @unique
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
 model Item {
   id         String  @id @default(uuid()) @map("item_id")
   itemCode       String  @map("item_code")
   itemName       String  @map("item_name")
   stock      Int     @map("stock")
   price      Float   @map("price")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   @@map("items")
 }

@@ -1,11 +1,16 @@
 import { Router, type Request, type Response } from "express";
 import { MESSAGES } from "../utils/Messages";
 import itemRoute from "../app/item/itemRoute";
+import userRoute from "../app/user/userRoute";
+import authRoute from "../app/auth/authRoute";
 import { MESSAGE_CODE } from "../utils/MessageCode";
 
 const route = Router();
 
 route.use("/items", itemRoute)
+route.use("/users", userRoute)
+route.use("/auth", authRoute)
+
 
 route.get("/", (req: Request, res: Response) => {
     return res.json({ message: "Hello World 🚀" })
