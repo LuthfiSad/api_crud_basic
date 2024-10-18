@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CatchWrapper } from "../../utils/CatchWrapper";
 import { loginController, registerController } from "./authController";
-import { uploadImage } from "config/multerConfig";
+import { uploadImage } from "../../config/multerConfig";
 
 const route = Router()
 

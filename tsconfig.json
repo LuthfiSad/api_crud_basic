@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     /* Language and Environment */
     "target": "ES2017",
     "resolveJsonModule": true,

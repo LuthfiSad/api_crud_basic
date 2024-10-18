@@ -1,4 +1,5 @@
-import { IFilter } from "interface/Filter";
+import { IFilter } from "../../interface/Filter";
+
 
 export interface ItemModelTypes {
   id?: string;             // ID item
