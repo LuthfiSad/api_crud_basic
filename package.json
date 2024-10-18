@@ -15,7 +15,7 @@
   },
   "author": "Muhamad Luthfi Sadli",
   "license": "MIT",
-  "description": "Technical Test",
+  "description": "Api Flutter Crud Basic",
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "@types/express": "^4.17.21",
